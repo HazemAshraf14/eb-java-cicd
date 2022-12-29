@@ -4,8 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.dockerforjavadevelopers</groupId>
-    <artifactId>hello-world</artifactId>
-    <version>0.1.0</version>
+    <artifactId>eb-java-ci-cd</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>eb-java-ci-cd</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
