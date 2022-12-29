@@ -61,5 +61,5 @@ jobs:
           application_name: eb-java-github-cicd #Application name we created in Elastic BeanStalk
           environment_name: Ebjavagithubcicd-env #Environment name we created in Elastic BeanStalk
           version_label: ${{github.SHA}}
-          region: us-east-1 #VERY IMPORTANT: AWS Region where initially Applciation was created in AWS EBS. We created in us-east-1 which is N-Virginia
+          region: us-west-2 #VERY IMPORTANT: AWS Region where initially Applciation was created in AWS EBS. We created in us-east-1 which is N-Virginia
           deployment_package: eb-java-ci-cd-0.0.1-SNAPSHOT.jar #download artifacts from previous job
