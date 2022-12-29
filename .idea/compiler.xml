@@ -6,15 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="docker-hello-world-spring-boot-master" />
+        <module name="eb-java-ci-cd" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="docker-hello-world-spring-boot-master" target="1.5" />
       <module name="hello-world" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="eb-java-ci-cd" options="-parameters" />
       <module name="hello-world" options="-parameters" />
     </option>
   </component>
