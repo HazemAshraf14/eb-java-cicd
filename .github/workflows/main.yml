@@ -1,0 +1,65 @@
+name: CI/CD Pipeline
+on:
+  workflow_dispatch:
+  # this will trigger workflow whenever a change is pushed to main branch
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build Archive
+    #Will run steps on latest version of ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      #Check-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
+      - uses: actions/checkout@v1
+      #Set up JDK 8
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '8'
+      #Set up Maven cache
+      - name: Cache Maven packages
+        #This action allows caching dependencies and build outputs to improve workflow execution time.
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      #Build the application using Maven
+      - name: Build with Maven
+        run: mvn -B package -DskipTests --file pom.xml
+      - name: Upload JAR
+        # We upload so we can re-use same jar in next job.
+        uses: actions/upload-artifact@v2
+        with:
+          #Name of artifact can be anything
+          name: artifact
+          #Relative path to jar file
+          path: target/eb-java-ci-cd-0.0.1-SNAPSHOT.jar
+
+
+  deploy:
+    #Depends on build's job
+    #needs: scan
+    name: Deploy to Elastic Beanstalk
+    #Will run steps on latest version of ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download JAR
+        #Download the artifact which was uploaded in the Build Archive's job
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact
+      #Deploy the artifact (JAR) into AWS BE
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v13
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }} #This is referred from Github Secrets
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} #This is referred from Github Secrets
+          use_existing_version_if_available: true
+          application_name: eb-java-github-cicd #Application name we created in Elastic BeanStalk
+          environment_name: Ebjavagithubcicd-env #Environment name we created in Elastic BeanStalk
+          version_label: ${{github.SHA}}
+          region: us-east-1 #VERY IMPORTANT: AWS Region where initially Applciation was created in AWS EBS. We created in us-east-1 which is N-Virginia
+          deployment_package: eb-java-ci-cd-0.0.1-SNAPSHOT.jar #download artifacts from previous job
