@@ -4,7 +4,7 @@ on:
   # this will trigger workflow whenever a change is pushed to main branch
   push:
     branches:
-      - main
+      - master
 jobs:
   build:
     name: Build Archive
@@ -41,7 +41,7 @@ jobs:
 
   deploy:
     #Depends on build's job
-    #needs: scan
+    needs: build
     name: Deploy to Elastic Beanstalk
     #Will run steps on latest version of ubuntu
     runs-on: ubuntu-latest
