@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 public class HelloController {
 
+    private String unusedVariable;
+
     @Value("${version}")
     private String version;
     @RequestMapping("/")
