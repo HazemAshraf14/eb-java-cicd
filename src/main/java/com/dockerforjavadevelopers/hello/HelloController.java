@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelloController {
 
     private String unusedVariable;
-    private String unusedVariable2;
 
     @Value("${version}")
     private String version;
