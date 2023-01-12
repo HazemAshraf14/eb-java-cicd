@@ -30,11 +30,14 @@ jobs:
       - name: Build with Maven
         run: mvn -B package -DskipTests --file pom.xml
 
+      - name: Move JAR to root folder
+        run: cp ./target/eb-java-ci-cd-0.0.1-SNAPSHOT.jar ./
+
       - name: Install zip
         uses: montudor/action-zip@v1
 
       - name: Zip output
-        run:  zip -qq -r deploy.zip .platform target/eb-java-ci-cd-0.0.1-SNAPSHOT.jar
+        run:  zip -qq -r deploy.zip .platform eb-java-ci-cd-0.0.1-SNAPSHOT.jar
         working-directory: ./
 
       - name: Upload ZIP
