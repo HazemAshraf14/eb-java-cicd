@@ -10,7 +10,7 @@ public class HelloController {
 
     private String unusedVariable;
 
-    @Value("${version}")
+    @Value("${APP_VERSION}")
     private String version;
     @RequestMapping("/")
     public String index() {

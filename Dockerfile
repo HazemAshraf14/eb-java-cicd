@@ -2,6 +2,7 @@ FROM maven:3.8.5-openjdk-11 AS maven_build
 COPY pom.xml /tmp/
 COPY src /tmp/src/
 WORKDIR /tmp/
+ENV APP_VERSION ${APP_VERSION}
 RUN mvn package
 FROM openjdk
 EXPOSE 5000

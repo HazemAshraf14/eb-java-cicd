@@ -2,8 +2,11 @@ version: "3.0"
 
 services:
   hello-world:
+
     build: 
       context: ./
       dockerfile: Dockerfile
     ports:
       - 80:5000
+    environment:
+      APP_VERSION: ${APP_VERSION}
