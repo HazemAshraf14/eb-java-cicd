@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eb-java-ci-cd" />
+        <module name="eb-java-cicd" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -17,6 +18,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="eb-java-ci-cd" options="-parameters" />
+      <module name="eb-java-cicd" options="-parameters" />
       <module name="hello-world" options="-parameters" />
     </option>
   </component>
