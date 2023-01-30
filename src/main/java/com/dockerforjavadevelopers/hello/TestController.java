@@ -19,7 +19,7 @@ public class TestController {
 
     @RequestMapping(value = "v1", method = RequestMethod.GET)
     public Map<String, Object> getProperties(HttpServletRequest request) {
-//
+
         final Map<String, Object> map = new HashMap<>();
         map.put("message", message);
         return map;
