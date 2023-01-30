@@ -1,0 +1,8 @@
+aws:
+  secretsmanager:
+    default-context: application
+    prefix: ec2/align
+    profile-separator: _
+    fail-fast: true
+    name: secret
+    enabled: true
